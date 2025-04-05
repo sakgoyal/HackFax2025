@@ -1,0 +1,17 @@
+---
+- # ====== Generative AI Service: Cohere API ===================
+  id: 25896156960436901676
+  identification: 
+    name: Cohere API
+
+  endpoint-url: 
+    url: 'https://api.cohere.ai/v1'
+
+  advanced: 
+    static-id: cohere_api
+    prompt-on-install: true
+
+  generative-ai-service: 
+    generative-ai-service-provider: Cohere
+    default-generative-ai-service: true
+

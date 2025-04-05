@@ -1,0 +1,95 @@
+---
+- # ====== AI Configuration: Learn More AI =====================
+  id: 25897120002384700165
+  identification: 
+    name: Learn More AI
+    static-id: learn_more_ai
+
+  generative-ai: 
+    service: Application Default
+    system-prompt: If the question cannot be answered based on the above context, say "Information Not Found!".
+    welcome-message: Welcome! How may I help you?
+
+  subscription: 
+    version-number: 15616233173371
+
+  rag-sources: 
+  - # ====== RAG Source: Course ==================================
+    id: 25897208973830725733
+    identification: 
+      name: Course
+
+    source: 
+      type: SQL Query
+      sql-query: |
+        SELECT 
+          COURSE_NUMBER || ' - ' || COURSE_NAME || ' (' || CREDITS || ' credits)' AS info,
+          SCHOOL_NAME,
+          STATE,
+          GMU_COURSE_NUMBER,
+          GMU_COURSE_NAME,
+          GMU_CREDITS
+        FROM MATRIX
+        
+
+- # ====== AI Configuration: chatbot ===========================
+  id: 25903420505218400132
+  identification: 
+    name: chatbot
+    static-id: chatbot
+
+  generative-ai: 
+    service: Cohere API # 25896156960436901676
+
+  subscription: 
+    version-number: 15616241456652
+
+  rag-sources: 
+  - # ====== RAG Source: rag =====================================
+    id: 25905084443642210038
+    identification: 
+      name: rag
+
+    source: 
+      type: SQL Query
+      sql-query: |
+        select m.course_name || ' (' || m.course_number || ') from ' || m.school_name || 
+               ' worth ' || m.credits || ' credits' as chunk
+          from matrix m
+         where m.course_name is not null
+         order by m.course_name
+        
+
+- # ====== AI Configuration: test ==============================
+  id: 51799371261657761515
+  identification: 
+    name: test
+    static-id: test
+
+  generative-ai: 
+    service: Application Default
+    system-prompt: If the question cannot be answered based on the above context, say "Information Not Found!".
+    welcome-message: Welcome! How may I help you?
+
+  subscription: 
+    version-number: 15616233813994
+
+  rag-sources: 
+  - # ====== RAG Source: Course ==================================
+    id: 51799460233103787083
+    identification: 
+      name: Course
+
+    source: 
+      type: SQL Query
+      sql-query: |
+        SELECT 
+          COURSE_NUMBER || ' - ' || COURSE_NAME || ' (' || CREDITS || ' credits)' AS info,
+          SCHOOL_NAME,
+          STATE,
+          GMU_COURSE_NUMBER,
+          GMU_COURSE_NAME,
+          GMU_CREDITS
+        FROM MATRIX
+        
+

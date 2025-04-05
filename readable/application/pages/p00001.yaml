@@ -1,0 +1,953 @@
+---
+# ====== Page: Course Search =================================
+id: 1
+identification: 
+  name: Course Search
+  alias: COURSE-SEARCH
+  title: Course Search
+
+appearance: 
+  page-mode: Normal
+  page-template: Left Side Column
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Breadcrumb ==================================
+  id: 25890102121791080286
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 25833169583202931240
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Search Results ==============================
+  id: 25890102834408080291
+  identification: 
+    name: Search Results
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select ID,
+             STATE,
+             SCHOOL_CODE,
+             SCHOOL_NAME,
+             COURSE_NUMBER,
+             COURSE_NAME,
+             CREDITS,
+             GMU_COURSE_NUMBER,
+             GMU_COURSE_NAME,
+             GMU_CREDITS
+        from MATRIX 
+      WHERE (
+              :P1_SEARCH_MODE = 'GMU'
+              AND UPPER(GMU_COURSE_NUMBER) = UPPER(:P1_SEARCH)
+            )
+         OR (
+              :P1_SEARCH_MODE = 'TRANSFER'
+              AND UPPER(COURSE_NUMBER) = UPPER(:P1_SEARCH)
+            )
+         OR (
+              :P1_SEARCH_MODE = 'ALL'
+            )
+      
+
+  order-by: 
+    type: Item
+    item: 
+      item-name: P1_ORDER_BY
+      order-bys: 
+      - key: SCHOOL_NAME
+        clause: '"SCHOOL_NAME" asc'
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-CardsRegion--hideHeader js-addHiddenHeadingRoleDesc
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 25890106778500080320
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    title: 
+      advanced-formatting: true
+      html-expression: |
+        <div class="a-CardView-mainContent">
+            <h3>&SCHOOL_NAME. - &STATE.</h3><br />
+            <strong>&COURSE_NUMBER.</strong><br>
+            <p>&COURSE_NAME.</p>
+            <p>&CREDITS. credits</p>
+        </div>
+
+    subtitle: 
+      advanced-formatting: false
+
+    body: 
+      advanced-formatting: true
+      html-expression: |
+        <div class="a-CardView-mainContent">
+            <h3>George Mason University</h3><br />
+            <strong>&GMU_COURSE_NUMBER.</strong><br>
+            <p>&GMU_COURSE_NAME.</p>
+            <p>&GMU_CREDITS. credits</p>
+        </div>
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: Not seeing any classes? Try searching for a class, or switch Search Mode to "View All Courses"
+
+    actions: 
+    - # ====== Action: Learn More ==================================
+      id: 25899119938936105701
+      identification: 
+        type: Button
+        label: Learn More
+
+      layout: 
+        position: Primary
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.::P6_SCHOOL_ID:&ID.'
+          page: 6 # Chat Page
+          values: 
+            p6_school_id: '&ID.'
+
+      appearance: 
+        display-type: Icon
+        icon: fa-info-circle-o u-opacity-60
+        hot: false
+        css-classes: 
+        - t-Button--noUI
+
+- # ====== Region: Search ======================================
+  id: 25890102975280080291
+  identification: 
+    name: Search
+    type: Faceted Search
+
+  source: 
+    filtered-region: Search Results # 25890102834408080291
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_02
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 4
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+    landmark-label: Filters
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      batch-facet-changes: false
+      compact-numbers-threshold: 10000
+      show-current-facets: Selector
+      current-facets-selector: '#active_facets'
+      show-total-row-count: Yes
+      show-charts: Dialog
+      display-chart-for-top-n-values: 10
+
+  facets: 
+  - # ====== Facet: P1_TRANSFERRING_SCHOOL =======================
+    id: 25888512222772242503
+    identification: 
+      name: P1_TRANSFERRING_SCHOOL
+      type: Checkbox Group
+
+    label: 
+      label: Transferring School
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 30
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: SQL Query
+      sql-query: |
+        SELECT DISTINCT SCHOOL_NAME AS D, SCHOOL_NAME AS R
+        FROM MATRIX
+        ORDER BY 1
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: false
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: true
+
+    advanced: 
+      show-chart-initially: false
+      collapsible: false
+
+    source: 
+      database-column: SCHOOL_NAME
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Facet: P1_SEARCH ====================================
+    id: 25890103421941080293
+    identification: 
+      name: P1_SEARCH
+      type: Search
+
+    label: 
+      label: Search
+
+    settings: 
+      search-type: Row Search
+      input-field: Top of Faceted Search Region
+
+    layout: 
+      sequence: 10
+
+    source: 
+      database-column(s): STATE,SCHOOL_NAME,COURSE_NUMBER,COURSE_NAME,GMU_COURSE_NUMBER,GMU_COURSE_NAME
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  - # ====== Facet: P1_CREDITS ===================================
+    id: 25890103897362080300
+    identification: 
+      name: P1_CREDITS
+      type: Range
+
+    label: 
+      label: Credits
+      show-label-for-current-facet: true
+
+    settings: 
+      select-multiple: true
+      manual-entry: false
+
+    layout: 
+      sequence: 40
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Static Values
+      static-values: 'STATIC2:<3;|3,3 - 4;3|4,>=4;4|'
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: true
+
+    advanced: 
+      show-chart-initially: false
+      collapsible: false
+
+    source: 
+      database-column: CREDITS
+      data-type: NUMBER
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  - # ====== Facet: P1_GMU_CREDITS ===============================
+    id: 25890104333107080307
+    identification: 
+      name: P1_GMU_CREDITS
+      type: Range
+
+    label: 
+      label: GMU Credits
+      show-label-for-current-facet: true
+
+    settings: 
+      select-multiple: true
+      manual-entry: false
+
+    layout: 
+      sequence: 50
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Static Values
+      static-values: 'STATIC2:<3;|3,3 - 4;3|4,>=4;4|'
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: true
+
+    advanced: 
+      show-chart-initially: false
+      collapsible: false
+
+    source: 
+      database-column: GMU_CREDITS
+      data-type: NUMBER
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  - # ====== Facet: P1_STATE =====================================
+    id: 25890104881967080308
+    identification: 
+      name: P1_STATE
+      type: Checkbox Group
+
+    label: 
+      label: State
+      show-label-for-current-facet: true
+
+    layout: 
+      sequence: 20
+
+    appearance: 
+      display: Inline
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: false
+      show-selected-first: false
+      maximum-displayed-entries: 7
+      display-filter-initially: false
+
+    actions-menu: 
+      filter: true
+      chart: true
+
+    advanced: 
+      show-chart-initially: false
+      collapsible: false
+
+    source: 
+      database-column: STATE
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  filters: 
+  - # ====== Filter: P1_TRANSFERRING_SCHOOL ======================
+    id: 25888512222772242503
+    identification: 
+      name: P1_TRANSFERRING_SCHOOL
+      type: Checkbox Group
+
+    label: 
+      label: Transferring School
+
+    layout: 
+      sequence: 30
+
+    list-of-values: 
+      type: SQL Query
+      sql-query: |
+        SELECT DISTINCT SCHOOL_NAME AS D, SCHOOL_NAME AS R
+        FROM MATRIX
+        ORDER BY 1
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: false
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: None
+
+    source: 
+      database-column: SCHOOL_NAME
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+  - # ====== Filter: P1_SEARCH ===================================
+    id: 25890103421941080293
+    identification: 
+      name: P1_SEARCH
+      type: Search
+
+    label: 
+      label: Search
+
+    settings: 
+      search-type: Row Search
+      collapsed-search-field: false
+
+    layout: 
+      sequence: 10
+
+    source: 
+      database-column(s): STATE,SCHOOL_NAME,COURSE_NUMBER,COURSE_NAME,GMU_COURSE_NUMBER,GMU_COURSE_NAME
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  - # ====== Filter: P1_CREDITS ==================================
+    id: 25890103897362080300
+    identification: 
+      name: P1_CREDITS
+      type: Range
+
+    label: 
+      label: Credits
+
+    settings: 
+      select-multiple: true
+      manual-entry: false
+
+    layout: 
+      sequence: 40
+
+    list-of-values: 
+      type: Static Values
+      static-values: 'STATIC2:<3;|3,3 - 4;3|4,>=4;4|'
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: None
+
+    source: 
+      database-column: CREDITS
+      data-type: NUMBER
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  - # ====== Filter: P1_GMU_CREDITS ==============================
+    id: 25890104333107080307
+    identification: 
+      name: P1_GMU_CREDITS
+      type: Range
+
+    label: 
+      label: GMU Credits
+
+    settings: 
+      select-multiple: true
+      manual-entry: false
+
+    layout: 
+      sequence: 50
+
+    list-of-values: 
+      type: Static Values
+      static-values: 'STATIC2:<3;|3,3 - 4;3|4,>=4;4|'
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: None
+
+    source: 
+      database-column: GMU_CREDITS
+      data-type: NUMBER
+
+    security: 
+      store-value-encrypted-in-session-state: true
+
+  - # ====== Filter: P1_STATE ====================================
+    id: 25890104881967080308
+    identification: 
+      name: P1_STATE
+      type: Checkbox Group
+
+    label: 
+      label: State
+
+    layout: 
+      sequence: 20
+
+    list-of-values: 
+      type: Distinct Values
+      sort-direction: Ascending
+      include-null-option: false
+
+    list-entries: 
+      compute-counts: true
+      show-counts: true
+      zero-count-entries: Hide
+      sort-by-top-counts: false
+      show-selected-first: false
+      client-side-filtering: false
+
+    suggestions: 
+      type: None
+
+    source: 
+      database-column: STATE
+      data-type: VARCHAR2
+
+    multiple-values: 
+      type: No
+
+    security: 
+      store-value-encrypted-in-session-state: true
+      escape-special-characters: true
+
+- # ====== Region: Button Bar ==================================
+  id: 25890105575519080316
+  identification: 
+    name: Button Bar
+    type: Static Content
+
+  source: 
+    html-code: <div id="active_facets"></div>
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Buttons Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-ButtonRegion--noPadding
+    - t-ButtonRegion--noUI
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P1_SEARCH_MODE ===========================
+  id: 25888512380548242504
+  identification: 
+    name: P1_SEARCH_MODE
+    type: Select List
+
+  label: 
+    label: Search Mode
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: Redirect and Set Value
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: Search # 25890102975280080291
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC:View All Courses;ALL,Search for a GMU Course;GMU,Search for a Transfer Course;TRANSFER'
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: ALL
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P1_ORDER_BY ==============================
+  id: 25890107297911080320
+  identification: 
+    name: P1_ORDER_BY
+    type: Select List
+
+  label: 
+    label: Order By
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: Search Results # 25890102834408080291
+    slot: ORDER_BY_ITEM
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: Static Values
+    static-values: 'STATIC:Transferring Course Number;COURSE_NUMBER,Transferring Course Name;COURSE_NAME,Transferring School;SCHOOL_NAME,GMU Course Number;GMU_COURSE_NUMBER,GMU Course Name;GMU_COURSE_NAME'
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Static
+    static-value: SCHOOL_NAME
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: RESET =======================================
+  id: 25890106062544080317
+  identification: 
+    button-name: RESET
+    label: Reset
+
+  layout: 
+    sequence: 10
+    region: Button Bar # 25890105575519080316
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--noUI
+    - t-Button--iconLeft
+    icon: fa-undo
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:RR,1::'
+      page: 1 # Course Search
+      clear-cache: RR,1
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: ask =========================================
+  id: 25899120141037105703
+  identification: 
+    button-name: ask
+    label: Ask a Question
+
+  layout: 
+    sequence: 10
+    region: Breadcrumb # 25890102121791080286
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+dynamic-actions: 
+- # ====== Dynamic Action: AI Chatbot ==========================
+  id: 25899120209451105704
+  identification: 
+    name: AI Chatbot
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: ask # 25899120141037105703
+
+  actions: 
+  - # ====== Action: Show AI Assistant ===========================
+    id: 25899120331197105705
+    identification: 
+      action: Show AI Assistant
+
+    generative-ai: 
+      configuration: chatbot # 25903420505218400132
+
+    appearance: 
+      display-as: Dialog
+      title: Chat BOT
+
+    initial-prompt: 
+      type: NONE
+
+    use-response: 
+      type: NONE
+
+    quick-actions: 
+      message-1: Show all courses with 4 credits
+      message-2: Which transferred courses match GMU computer science courses?
+
+    execution: 
+      sequence: 10
+      event: AI Chatbot # 25899120209451105704
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

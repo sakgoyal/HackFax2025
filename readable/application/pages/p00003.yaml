@@ -1,0 +1,1545 @@
+---
+# ====== Page: Your Transfer Plan ============================
+id: 3
+identification: 
+  name: Your Transfer Plan
+  alias: TRANSFER-PLAN
+  title: Your Transfer Plan
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Transfer Plan ===============================
+  id: 25888514600614242527
+  identification: 
+    name: Transfer Plan
+    title: Transfer Plan
+    type: Interactive Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      SELECT
+        P.COURSE_ID,
+        C.ID,
+        C.SCHOOL_NAME,
+        C.COURSE_NUMBER,
+        C.COURSE_NAME,
+        C.CREDITS,
+        C.GMU_COURSE_NUMBER,
+        C.GMU_COURSE_NAME,
+        C.GMU_CREDITS
+      FROM
+        PLAN P
+      JOIN
+        MATRIX C ON P.COURSE_ID = C.ID
+      
+    page-items-to-submit: 
+    - P3_SELECTED_ID
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    - t-IRR-region--hideHeader js-addHiddenHeadingRoleDesc
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 25888514713300242528
+    link: 
+      link-column: Link to Custom Target
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:::'
+        page: 3 # Your Transfer Plan
+
+      link-icon: |
+        <a href="javascript:void(0);" class="remove-from-plan" data-course-id="#ID#"">
+          <span role="img" aria-label="Add" class="fa fa-minus-circle" title="Add"></span>
+        </a>
+
+    pagination: 
+      type: Row Ranges X to Y
+      display-position: Bottom - Right
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No data found.
+      when-more-data-found: 'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+
+    search-bar: 
+      include-search-bar: false
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 25904654860189176748
+      identification: 
+        name: Primary Report
+        alias: 259046549
+
+    columns: 
+    - # ====== Column: SCHOOL_NAME =================================
+      id: 25888515161763242532
+      identification: 
+        column-name: SCHOOL_NAME
+        type: Plain Text
+
+      heading: 
+        heading: School Name
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 20
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: COURSE_NUMBER ===============================
+      id: 25888515254394242533
+      identification: 
+        column-name: COURSE_NUMBER
+        type: Plain Text
+
+      heading: 
+        heading: Course Number
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 30
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: COURSE_NAME =================================
+      id: 25888515361891242534
+      identification: 
+        column-name: COURSE_NAME
+        type: Plain Text
+
+      heading: 
+        heading: Course Name
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 40
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: CREDITS =====================================
+      id: 25888515467246242535
+      identification: 
+        column-name: CREDITS
+        type: Plain Text
+
+      heading: 
+        heading: Credits
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 50
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G999G999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: GMU_COURSE_NUMBER ===========================
+      id: 25888515531455242536
+      identification: 
+        column-name: GMU_COURSE_NUMBER
+        type: Plain Text
+
+      heading: 
+        heading: GMU Course Number
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 60
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: GMU_COURSE_NAME =============================
+      id: 25888515676493242537
+      identification: 
+        column-name: GMU_COURSE_NAME
+        type: Plain Text
+
+      heading: 
+        heading: GMU Course Name
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 70
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: GMU_CREDITS =================================
+      id: 25888515775341242538
+      identification: 
+        column-name: GMU_CREDITS
+        type: Plain Text
+
+      heading: 
+        heading: GMU Credits
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 80
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G999G999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: COURSE_ID ===================================
+      id: 25888515812270242539
+      identification: 
+        column-name: COURSE_ID
+        type: Hidden
+
+      heading: 
+        heading: Course Id
+
+      layout: 
+        sequence: 90
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: ID ==========================================
+      id: 25908852144783683506
+      identification: 
+        column-name: ID
+        type: Hidden
+
+      heading: 
+        heading: Id
+
+      layout: 
+        sequence: 10
+
+      source: 
+        primary-key: false
+
+      security: 
+        escape-special-characters: true
+
+- # ====== Region: Breadcrumb ==================================
+  id: 25895732359505573890
+  identification: 
+    name: Breadcrumb
+    type: Breadcrumb
+
+  source: 
+    breadcrumb: Breadcrumb # 25833169583202931240
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_01
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Title Bar
+    template-options: 
+    - '#DEFAULT#'
+    - t-BreadcrumbRegion--useBreadcrumbTitle
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      breadcrumb-template: Breadcrumb
+      template-options: 
+      - '#DEFAULT#'
+
+- # ====== Region: Add Courses =================================
+  id: 25895733029815573892
+  identification: 
+    name: Add Courses
+    title: Add Courses
+    type: Interactive Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select ID,
+             STATE,
+             SCHOOL_NAME,
+             COURSE_NUMBER,
+             COURSE_NAME,
+             CREDITS,
+             GMU_COURSE_NUMBER,
+             GMU_COURSE_NAME,
+             GMU_CREDITS
+        from MATRIX
+      WHERE (STATE = :P3_STATE)
+        AND (SCHOOL_NAME = :P3_SCHOOL)
+      
+    page-items-to-submit: 
+    - P3_SELECTED_ID
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report
+    template-options: 
+    - '#DEFAULT#'
+    - t-IRR-region--hideHeader js-addHiddenHeadingRoleDesc
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 25895733142921573892
+    link: 
+      link-column: Link to Custom Target
+      target: 
+        url: 'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:::'
+        page: 3 # Your Transfer Plan
+
+      link-icon: |
+        <a href="javascript:void(0);" class="add-to-plan" data-course-id="#ID#"">
+          <span role="img" aria-label="Add" class="fa fa-plus-circle" title="Add"></span>
+        </a>
+
+    pagination: 
+      type: Row Ranges X to Y
+      display-position: Bottom - Right
+
+    performance: 
+      lazy-loading: false
+
+    messages: 
+      when-no-data-found: No data found.
+      when-more-data-found: 'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+
+    search-bar: 
+      include-search-bar: true
+      search-field: true
+      finder-drop-down: true
+      reports-select-list: true
+      rows-per-page-selector: false
+
+    actions-menu: 
+      include-actions-menu: true
+      filter: true
+      select-columns: true
+      rows-per-page: true
+      sort: true
+      control-break: true
+      highlight: true
+      compute: true
+      aggregate: true
+      chart: true
+      group-by: true
+      pivot: true
+      flashback: true
+      save-report: true
+      save-public-report: false
+      reset: true
+      help: true
+      download: true
+      subscription: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 25895527860990850062
+      identification: 
+        name: Primary Report
+        alias: 258955279
+
+    columns: 
+    - # ====== Column: ID ==========================================
+      id: 25895733752083574067
+      identification: 
+        column-name: ID
+        type: Hidden
+
+      heading: 
+        heading: ID
+
+      layout: 
+        sequence: 0
+
+      source: 
+        primary-key: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: STATE =======================================
+      id: 25895734122150574068
+      identification: 
+        column-name: STATE
+        type: Plain Text
+
+      heading: 
+        heading: State
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 2
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: SCHOOL_NAME =================================
+      id: 25895734930397574069
+      identification: 
+        column-name: SCHOOL_NAME
+        type: Plain Text
+
+      heading: 
+        heading: School Name
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 4
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: COURSE_NUMBER ===============================
+      id: 25895735332717574069
+      identification: 
+        column-name: COURSE_NUMBER
+        type: Plain Text
+
+      heading: 
+        heading: Course Number
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 5
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: COURSE_NAME =================================
+      id: 25895735732480574069
+      identification: 
+        column-name: COURSE_NAME
+        type: Plain Text
+
+      heading: 
+        heading: Course Name
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 6
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: CREDITS =====================================
+      id: 25895736195607574069
+      identification: 
+        column-name: CREDITS
+        type: Plain Text
+
+      heading: 
+        heading: Credits
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 7
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G999G999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: GMU_COURSE_NUMBER ===========================
+      id: 25895736512407574070
+      identification: 
+        column-name: GMU_COURSE_NUMBER
+        type: Plain Text
+
+      heading: 
+        heading: GMU Course Number
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 8
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: GMU_COURSE_NAME =============================
+      id: 25895736984025574070
+      identification: 
+        column-name: GMU_COURSE_NAME
+        type: Plain Text
+
+      heading: 
+        heading: GMU Course Name
+        alignment: start
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 9
+        column-alignment: start
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    - # ====== Column: GMU_CREDITS =================================
+      id: 25895737321087574070
+      identification: 
+        column-name: GMU_CREDITS
+        type: Plain Text
+
+      heading: 
+        heading: GMU Credits
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 10
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      appearance: 
+        format-mask: 999G999G999G999G999G999G999G999G999G990
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Default Based on Column Type
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+      security: 
+        escape-special-characters: true
+
+    printing: 
+      output: 
+        layout: Default Report Layout
+        view-file-as: Attachment
+
+      page: 
+        size: Letter
+        orientation: Landscape
+        units: Inches
+        width: 11
+        height: 8.5
+        border-width: 0.5
+        border-color: '#666666'
+
+      page-header: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 12
+        font-color: '#000000'
+        alignment: center
+        page-header-text: Transfer Plan
+
+      column-headings: 
+        font: Helvetica
+        font-weight: Bold
+        font-size: 10
+        font-color: '#000000'
+        background-color: '#EEEEEE'
+
+      columns: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 10
+        font-color: '#000000'
+        background-color: '#FFFFFF'
+
+      page-footer: 
+        font: Helvetica
+        font-weight: Normal
+        font-size: 12
+        font-color: '#000000'
+        alignment: center
+
+page-items: 
+- # ====== Page Item: P3_STATE =================================
+  id: 25888512598514242506
+  identification: 
+    name: P3_STATE
+    type: Select List
+
+  label: 
+    label: State
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: Redirect and Set Value
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: Add Courses # 25895733029815573892
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT DISTINCT STATE AS DISPLAY_VALUE, STATE AS RETURN_VALUE
+      FROM MATRIX
+      ORDER BY STATE
+    display-extra-values: false
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P3_SCHOOL ================================
+  id: 25888512627069242507
+  identification: 
+    name: P3_SCHOOL
+    type: Select List
+
+  label: 
+    label: School
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: Redirect and Set Value
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 20
+    region: Add Courses # 25895733029815573892
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: SQL Query
+    sql-query: |
+      SELECT DISTINCT SCHOOL_NAME AS DISPLAY_VALUE, SCHOOL_NAME AS RETURN_VALUE
+      FROM MATRIX
+      WHERE STATE = :P3_STATE
+      ORDER BY SCHOOL_NAME
+    display-extra-values: false
+    display-null-value: true
+    null-display-value: '-'
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Always, replacing any existing value in session state
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P3_SELECTED_ID ===========================
+  id: 25888512754240242508
+  identification: 
+    name: P3_SELECTED_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: Add Courses # 25895733029815573892
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P3_REMOVE_ID =============================
+  id: 25888516911524242550
+  identification: 
+    name: P3_REMOVE_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Transfer Plan # 25888514600614242527
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: clear-plan ==================================
+  id: 25888516401048242545
+  identification: 
+    button-name: clear-plan
+    label: CLEAR TRANSFER PLAN
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--iconLeft
+    icon: fa-lg fa-eraser
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL DELETE action
+
+  confirmation: 
+    message: 'Are you sure you want to clear your transfer plan? '
+    style: Default
+
+dynamic-actions: 
+- # ====== Dynamic Action: Add to Plan =========================
+  id: 25888512840265242509
+  identification: 
+    name: Add to Plan
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: jQuery Selector
+    jquery-selector: .add-to-plan
+
+  actions: 
+  - # ====== Action: Execute Server-side Code ====================
+    id: 25888512959039242510
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: |
+        DECLARE
+          v_count INTEGER;
+        BEGIN
+          -- Check if the course already exists in the plan for the current session
+          SELECT COUNT(*)
+          INTO v_count
+          FROM PLAN
+          WHERE COURSE_ID = :P3_SELECTED_ID;
+        
+          IF v_count = 0 THEN
+            -- If the course does not exist, insert it into the PLAN table
+            INSERT INTO PLAN (COURSE_ID)
+            VALUES (:P3_SELECTED_ID);
+          ELSE
+            -- Raise an error if the course is already in the plan
+            RAISE_APPLICATION_ERROR(-20001, 'This course is already in your plan.');
+          END IF;
+        END;
+      items-to-submit: 
+      - P3_SELECTED_ID
+
+    execution: 
+      sequence: 20
+      event: Add to Plan # 25888512840265242509
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Set Value ===================================
+    id: 25888513061483242511
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: JavaScript Expression
+      javascript-expression: $(this.triggeringElement).data('course-id')
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P3_SELECTED_ID
+
+    execution: 
+      sequence: 10
+      event: Add to Plan # 25888512840265242509
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 25888513190872242512
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.message.alert('Course successfully added to your plan!');
+
+    execution: 
+      sequence: 30
+      event: Add to Plan # 25888512840265242509
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Refresh =====================================
+    id: 25888516832368242549
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Transfer Plan # 25888514600614242527
+
+    execution: 
+      sequence: 50
+      event: Add to Plan # 25888512840265242509
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: Clear Plan ==========================
+  id: 25888516569082242546
+  identification: 
+    name: Clear Plan
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: clear-plan # 25888516401048242545
+
+  actions: 
+  - # ====== Action: Execute Server-side Code ====================
+    id: 25888516628518242547
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: |
+        BEGIN
+           DELETE FROM PLAN;
+        END;
+
+    execution: 
+      sequence: 10
+      event: Clear Plan # 25888516569082242546
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: false
+      wait-for-result: false
+
+  - # ====== Action: Refresh =====================================
+    id: 25908852091344683505
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Transfer Plan # 25888514600614242527
+
+    execution: 
+      sequence: 20
+      event: Clear Plan # 25888516569082242546
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: Remove from Plan ====================
+  id: 25908851695702683501
+  identification: 
+    name: Remove from Plan
+
+  execution: 
+    sequence: 30
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: jQuery Selector
+    jquery-selector: .remove-from-plan
+
+  actions: 
+  - # ====== Action: Set Value ===================================
+    id: 25908851756290683502
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: JavaScript Expression
+      javascript-expression: $(this.triggeringElement).data('course-id')
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P3_REMOVE_ID
+
+    execution: 
+      sequence: 10
+      event: Remove from Plan # 25908851695702683501
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Execute Server-side Code ====================
+    id: 25908851880653683503
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: |
+        DECLARE
+          v_count INTEGER;
+        BEGIN
+          -- Check if the course exists in the plan for the current session
+          SELECT COUNT(*)
+          INTO v_count
+          FROM PLAN
+          WHERE COURSE_ID = :P3_REMOVE_ID;
+        
+          IF v_count > 0 THEN
+            -- If the course exists, delete it from the PLAN table
+            DELETE FROM PLAN
+            WHERE COURSE_ID = :P3_REMOVE_ID;
+          ELSE
+            -- Raise an error if the course is not in the plan
+            RAISE_APPLICATION_ERROR(-20002, 'This course is not in your plan.');
+          END IF;
+        END;
+        
+      items-to-submit: 
+      - P3_REMOVE_ID
+
+    execution: 
+      sequence: 30
+      event: Remove from Plan # 25908851695702683501
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Refresh =====================================
+    id: 25908851997486683504
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Transfer Plan # 25888514600614242527
+
+    execution: 
+      sequence: 50
+      event: Remove from Plan # 25908851695702683501
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 25908852245619683507
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.message.alert('Course successfully removed from your plan!');
+
+    execution: 
+      sequence: 40
+      event: Remove from Plan # 25908851695702683501
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

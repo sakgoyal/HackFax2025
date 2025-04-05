@@ -1,0 +1,31 @@
+---
+- # ====== Search Configuration: Test ==========================
+  id: 25930421298690025278
+  identification: 
+    name: Test
+
+  subscription: 
+    version-number: 15616254190717
+
+  source: 
+    search-type: Oracle Text (Manual)
+    table-owner: Parsing Schema
+    table-name: MATRIX
+    oracle-text-index-column: GMU_COURSE_NAME
+    type: Table / View
+
+  row-search: 
+    text-query-function: None
+
+  column-mapping: 
+    primary-key-1-column-name: ID
+    primary-key-2-column-name: GMU_COURSE_NAME
+    title-column-name: SCHOOL_NAME
+    description-column-name: COURSE_NAME
+
+  icon-and-badge: 
+    icon-source: Initials
+
+  advanced: 
+    static-id: test
+

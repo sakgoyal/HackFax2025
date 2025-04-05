@@ -1,0 +1,161 @@
+---
+# ====== Page: Chat Page =====================================
+id: 6
+identification: 
+  name: Chat Page
+  alias: CHAT-PAGE
+  title: Chat Page
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+  - t-Dialog--noPadding
+  - t-PageBody--noContentPadding
+
+dialog: 
+  chained: true
+  resizable: true
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Chat ========================================
+  id: 25851105292875253502
+  identification: 
+    name: Chat
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - i-h320
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--scrollBody
+    - margin-bottom-none
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: chat
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P6_SCHOOL_ID =============================
+  id: 25851105395143253503
+  identification: 
+    name: P6_SCHOOL_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: Show AI Assistant - Chat. ===========
+  id: 25851105404405253504
+  identification: 
+    name: Show AI Assistant - Chat.
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  actions: 
+  - # ====== Action: Show AI Assistant ===========================
+    id: 25851105500117253505
+    identification: 
+      action: Show AI Assistant
+
+    generative-ai: 
+      configuration: Learn More AI # 25897120002384700165
+
+    appearance: 
+      display-as: Inline
+      container-selector: '#chat'
+
+    initial-prompt: 
+      type: NONE
+
+    use-response: 
+      type: NONE
+
+    quick-actions: 
+      message-1: Which courses are transferable to MATH 125 in GMU
+
+    execution: 
+      sequence: 10
+      event: Show AI Assistant - Chat. # 25851105404405253504
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

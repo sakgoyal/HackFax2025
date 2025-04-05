@@ -1,0 +1,257 @@
+---
+# ====== Application: Transfer ===============================
+identification: 
+  name: Transfer
+  alias: TRANSFER257734
+  version: Release 1.0
+
+row-search: 
+  tokenize: true
+  text-query-function: None
+
+availability: 
+  status: Available with Developer Toolbar
+  build-status: Run and Build Application
+
+error-handling: 
+  default-display-location: Inline with Field and in Notification
+
+report-printing: 
+  type: Use Instance Settings
+
+advanced: 
+  friendly-urls: true
+  allow-feedback: true
+  logging: true
+  debugging: true
+  compatibility-mode: 24.2
+  accessible-read-only-items: true
+  pass-ecid: Y
+
+authentication: 
+  public-user: APEX_PUBLIC_USER
+  authentication-scheme: Public Access # 25892792943947343917
+
+authorization: 
+  source-for-role-or-group-schemes: Access Control User Role Assignments
+
+session-management: 
+  rejoin-sessions: Disabled
+
+session-state-protection: 
+  enabled: true
+
+security: 
+  deep-linking: Disabled
+  browser-cache: Disabled
+  embed-in-frames: Deny
+  referrer-policy: strict-origin
+  html-escaping-mode: Extended
+
+database-session: 
+  parsing-schema: WKSP_TRANSFER
+
+globalization: 
+  primary-language: English (en)
+  document-direction: Language Default
+  language-derived-from: Application Primary Language
+  automatic-time-zone: false
+  automatic-csv-encoding: true
+
+application-format-masks: 
+  date: DS
+  timestamp: DS
+  timestamp-time-zone: DS
+
+character-value-comparison: 
+  behavior: Database session NLS setting (default)
+
+logo: 
+  type: Text
+  text: Transfer
+
+progressive-web-app: 
+  enable: true
+  installable: false
+  display: Standalone
+  screen-orientation: Any
+  ios-status-bar-style: Default
+  enable-push-notifications: false
+
+navigation: 
+  home-url: 
+    url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+    page: 1 # Course Search
+
+  login-url: 
+    url: 'f?p=&APP_ID.:LOGIN:&APP_SESSION.::&DEBUG.:::'
+    page: LOGIN
+
+navigation-menu: 
+  list-template: Side Navigation Menu
+  template-options: 
+  - '#DEFAULT#'
+  - t-TreeNav--styleA
+  - js-navCollapsed--hidden
+  list-position: Side
+  list: Navigation Menu # 25833170066930931241
+
+navigation-bar: 
+  implementation: List
+  list: Navigation Bar # 25833171207391931243
+  list-template: Navigation Bar
+  template-options: 
+  - '#DEFAULT#'
+
+javascript: 
+  include-jquery-migrate: false
+
+attributes: 
+  theme: Universal Theme # 42
+  global-page: 0
+  enable-end-users-to-choose-theme-style: false
+  add-"built-with-apex"-to-footer: false
+  auto-dismiss-success-messages: false
+
+subscription: 
+  version-number: 15616325159644
+
+substitutions: 
+- # ====== Substitution: APP_NAME ==============================
+  id: 1
+  identification: 
+    name: APP_NAME
+
+  value: 
+    static-value: Transfer
+
+component-settings: 
+- # ====== Component Setting: NATIVE_OPEN_AI_ASSISTANT =========
+  id: 25833164771321931236
+  identification: 
+    name: NATIVE_OPEN_AI_ASSISTANT
+    type: Dynamic Action
+
+  subscription: 
+    version-number: 15616165454513
+
+- # ====== Component Setting: NATIVE_COLOR_PICKER ==============
+  id: 25833165027699931237
+  identification: 
+    name: NATIVE_COLOR_PICKER
+    type: Item
+
+  subscription: 
+    version-number: 15616165454526
+
+- # ====== Component Setting: NATIVE_DATE_PICKER_APEX ==========
+  id: 25833165370593931237
+  identification: 
+    name: NATIVE_DATE_PICKER_APEX
+    type: Item
+
+  subscription: 
+    version-number: 15616165454530
+
+- # ====== Component Setting: NATIVE_GEOCODED_ADDRESS ==========
+  id: 25833165640645931237
+  identification: 
+    name: NATIVE_GEOCODED_ADDRESS
+    type: Item
+
+  subscription: 
+    version-number: 15616165454545
+
+- # ====== Component Setting: NATIVE_SELECT_MANY ===============
+  id: 25833165987616931238
+  identification: 
+    name: NATIVE_SELECT_MANY
+    type: Item
+
+  subscription: 
+    version-number: 15616165454558
+
+- # ====== Component Setting: NATIVE_SINGLE_CHECKBOX ===========
+  id: 25833166292305931238
+  identification: 
+    name: NATIVE_SINGLE_CHECKBOX
+    type: Item
+
+  subscription: 
+    version-number: 15616165454567
+
+- # ====== Component Setting: NATIVE_STAR_RATING ===============
+  id: 25833166545554931238
+  identification: 
+    name: NATIVE_STAR_RATING
+    type: Item
+
+  subscription: 
+    version-number: 15616165454583
+
+- # ====== Component Setting: NATIVE_YES_NO ====================
+  id: 25833166831885931238
+  identification: 
+    name: NATIVE_YES_NO
+    type: Item
+
+  subscription: 
+    version-number: 15616165454590
+
+- # ====== Component Setting: NATIVE_GEOCODING =================
+  id: 25833167102807931238
+  identification: 
+    name: NATIVE_GEOCODING
+    type: Process
+
+  settings: 
+    attribute-1: RELAX_HOUSE_NUMBER
+
+  subscription: 
+    version-number: 15616165454593
+
+- # ====== Component Setting: NATIVE_DISPLAY_SELECTOR ==========
+  id: 25833167482357931238
+  identification: 
+    name: NATIVE_DISPLAY_SELECTOR
+    type: Region
+
+  subscription: 
+    version-number: 15616165454597
+
+- # ====== Component Setting: NATIVE_IR ========================
+  id: 25833167731790931239
+  identification: 
+    name: NATIVE_IR
+    type: Region
+
+  subscription: 
+    version-number: 15616165454598
+
+- # ====== Component Setting: NATIVE_MAP_REGION ================
+  id: 25833168018751931239
+  identification: 
+    name: NATIVE_MAP_REGION
+    type: Region
+
+  subscription: 
+    version-number: 15616165454608
+
+- # ====== Component Setting: NATIVE_ADFBC =====================
+  id: 25833168365087931239
+  identification: 
+    name: NATIVE_ADFBC
+    type: REST Data Source
+
+  subscription: 
+    version-number: 15616165454617
+
+- # ====== Component Setting: NATIVE_BOSS ======================
+  id: 25833168691293931239
+  identification: 
+    name: NATIVE_BOSS
+    type: REST Data Source
+
+  subscription: 
+    version-number: 15616165454622
+

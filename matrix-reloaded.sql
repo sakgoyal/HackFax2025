@@ -33,8 +33,7 @@ prompt APPLICATION 257734 - Transfer
 -- Application Export:
 --   Application:     257734
 --   Name:            Transfer
---   Date and Time:   16:56 Saturday April 5, 2025
---   Exported By:     ETHANDANGTON@GMAIL.COM
+--   Exported By:     USER3
 --   Flashback:       0
 --   Export Type:     Application Export
 --     Pages:                      5
@@ -110,7 +109,7 @@ wwv_imp_workspace.create_flow(
 ,p_substitution_value_01=>'Transfer'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>16
-,p_version_scn=>15616307981051
+,p_version_scn=>15616325159644
 ,p_print_server_type=>'INSTANCE'
 ,p_file_storage=>'DB'
 ,p_is_pwa=>'Y'
@@ -3957,6 +3956,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_lazy_loading=>false
 ,p_plug_source_type=>'NATIVE_CARDS'
 ,p_plug_query_num_rows_type=>'SCROLL'
+,p_plug_query_no_data_found=>'Not seeing any classes? Try searching for a class, or switch Search Mode to "View All Courses"'
 ,p_show_total_row_count=>false
 ,p_pagination_display_position=>'BOTTOM_RIGHT'
 );
@@ -4093,12 +4093,14 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P1_SEARCH_MODE'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(25890102975280080291)
+,p_item_default=>'ALL'
 ,p_prompt=>'Search Mode'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_lov=>'STATIC:View All Courses;ALL,Search for a GMU Course;GMU,Search for a Transfer Course;TRANSFER'
 ,p_cHeight=>1
 ,p_field_template=>1609121967514267634
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'NO'
 ,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
   'page_action_on_selection', 'REDIRECT_SET_VALUE')).to_clob
@@ -4237,7 +4239,8 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_OPEN_AI_ASSISTANT'
 ,p_attribute_01=>'DIALOG'
 ,p_attribute_02=>'Chat BOT'
-,p_attribute_14=>'Which transferred courses match GMU computer science courses?'
+,p_attribute_14=>'Show all courses with 4 credits'
+,p_attribute_15=>'Which transferred courses match GMU computer science courses?'
 ,p_ai_config_id=>wwv_flow_imp.id(25903420505218400132)
 );
 end;
