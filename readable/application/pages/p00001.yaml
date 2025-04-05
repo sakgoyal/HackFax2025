@@ -90,7 +90,7 @@ regions:
     location: Local Database
     type: SQL Query
     sql-query: |
-      select ID,
+      SELECT ID,
              STATE,
              SCHOOL_CODE,
              SCHOOL_NAME,
@@ -100,16 +100,16 @@ regions:
              GMU_COURSE_NUMBER,
              GMU_COURSE_NAME,
              GMU_CREDITS
-        from MATRIX 
+        FROM MATRIX 
       WHERE (
-              :P1_SEARCH_MODE = 'GMU'
-              AND UPPER(GMU_COURSE_NUMBER) = UPPER(:P1_SEARCH)
-            )
-         OR (
-              :P1_SEARCH_MODE = 'TRANSFER'
-              AND UPPER(COURSE_NUMBER) = UPPER(:P1_SEARCH)
-            )
-         OR (
+              (:P1_SEARCH_MODE = 'GMU' AND 
+               (:P1_SEARCH IS NULL OR TRIM(:P1_SEARCH) = '' OR UPPER(GMU_COURSE_NUMBER) = UPPER(:P1_SEARCH))
+              )
+           OR 
+              (:P1_SEARCH_MODE = 'TRANSFER' AND 
+               (:P1_SEARCH IS NULL OR TRIM(:P1_SEARCH) = '' OR UPPER(COURSE_NUMBER) = UPPER(:P1_SEARCH))
+              )
+           OR 
               :P1_SEARCH_MODE = 'ALL'
             )
       
@@ -344,6 +344,9 @@ regions:
     layout: 
       sequence: 10
 
+    appearance: 
+      value-placeholder: Search for a course...
+
     source: 
       database-column(s): STATE,SCHOOL_NAME,COURSE_NUMBER,COURSE_NAME,GMU_COURSE_NUMBER,GMU_COURSE_NAME
 
@@ -551,6 +554,9 @@ regions:
 
     layout: 
       sequence: 10
+
+    appearance: 
+      value-placeholder: Search for a course...
 
     source: 
       database-column(s): STATE,SCHOOL_NAME,COURSE_NUMBER,COURSE_NAME,GMU_COURSE_NUMBER,GMU_COURSE_NAME
@@ -764,10 +770,6 @@ page-items:
   source: 
     type: Null
     used: Only when current value in session state is null
-
-  default: 
-    type: Static
-    static-value: ALL
 
   session-state: 
     storage: Per Session (Persistent)

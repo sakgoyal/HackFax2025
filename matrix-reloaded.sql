@@ -109,7 +109,7 @@ wwv_imp_workspace.create_flow(
 ,p_substitution_value_01=>'Transfer'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>16
-,p_version_scn=>15616325159644
+,p_version_scn=>15616327110498
 ,p_print_server_type=>'INSTANCE'
 ,p_file_storage=>'DB'
 ,p_is_pwa=>'Y'
@@ -3928,7 +3928,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_sequence=>20
 ,p_query_type=>'SQL'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'select ID,',
+'SELECT ID,',
 '       STATE,',
 '       SCHOOL_CODE,',
 '       SCHOOL_NAME,',
@@ -3938,16 +3938,16 @@ wwv_flow_imp_page.create_page_plug(
 '       GMU_COURSE_NUMBER,',
 '       GMU_COURSE_NAME,',
 '       GMU_CREDITS',
-'  from MATRIX ',
+'  FROM MATRIX ',
 'WHERE (',
-'        :P1_SEARCH_MODE = ''GMU''',
-'        AND UPPER(GMU_COURSE_NUMBER) = UPPER(:P1_SEARCH)',
-'      )',
-'   OR (',
-'        :P1_SEARCH_MODE = ''TRANSFER''',
-'        AND UPPER(COURSE_NUMBER) = UPPER(:P1_SEARCH)',
-'      )',
-'   OR (',
+'        (:P1_SEARCH_MODE = ''GMU'' AND ',
+'         (:P1_SEARCH IS NULL OR TRIM(:P1_SEARCH) = '''' OR UPPER(GMU_COURSE_NUMBER) = UPPER(:P1_SEARCH))',
+'        )',
+'     OR ',
+'        (:P1_SEARCH_MODE = ''TRANSFER'' AND ',
+'         (:P1_SEARCH IS NULL OR TRIM(:P1_SEARCH) = '''' OR UPPER(COURSE_NUMBER) = UPPER(:P1_SEARCH))',
+'        )',
+'     OR ',
 '        :P1_SEARCH_MODE = ''ALL''',
 '      )',
 ''))
@@ -4093,7 +4093,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P1_SEARCH_MODE'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(25890102975280080291)
-,p_item_default=>'ALL'
 ,p_prompt=>'Search Mode'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_lov=>'STATIC:View All Courses;ALL,Search for a GMU Course;GMU,Search for a Transfer Course;TRANSFER'
@@ -4111,15 +4110,13 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(25890102975280080291)
 ,p_prompt=>'Search'
+,p_placeholder=>'Search for a course...'
 ,p_source=>'STATE,SCHOOL_NAME,COURSE_NUMBER,COURSE_NAME,GMU_COURSE_NUMBER,GMU_COURSE_NAME'
 ,p_source_type=>'FACET_COLUMN'
 ,p_display_as=>'NATIVE_SEARCH'
 ,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
-  'collapsed_search_field', 'N',
   'input_field', 'FACET',
   'search_type', 'ROW')).to_clob
-,p_fc_collapsible=>false
-,p_fc_initial_collapsed=>false
 ,p_fc_show_chart=>false
 );
 wwv_flow_imp_page.create_page_item(
